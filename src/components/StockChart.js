@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { createColors } from "../utils/utils";
+import { createColors, getRandomColor } from "../utils/utils";
 import { ResponsiveContainer } from "recharts";
 import {
   Line,
@@ -52,7 +52,7 @@ export default class StockChart extends Component {
               type="monotone"
               dataKey={e}
               connectNulls={true}
-              stroke= 
+              stroke =  {getRandomColor()}
             />
           )): null}
         </LineChart>
