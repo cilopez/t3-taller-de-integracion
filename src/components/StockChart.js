@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getRandomColor } from "../utils/utils";
+import { getRandomColor, getTickers } from "../utils/utils";
 import moment from "moment";
 import {
   Line,
@@ -20,25 +20,11 @@ export default class StockChart extends Component {
       tickers: [],
       lines: [],
     };
-    this.getTickers = this.getTickers.bind(this);
-  }
-
-  getTickers(data) {
-    const tickers = [];
-    for (let index = 0; index < data.length; index++) {
-      const element = data[index];
-      Object.keys(element).forEach(function (key) {
-        if (key !== "time" && !tickers.includes(key)) {
-          tickers.push(key);
-        }
-      });
-    }
-    return tickers;
   }
 
   componentWillReceiveProps(nextProps) {
     const { tickers, lines } = this.state;
-    const nextTickers = this.getTickers(nextProps.data);
+    const nextTickers = getTickers(nextProps.data);
     if (tickers === [] || nextTickers.length !== tickers.length) {
       this.setState({
         tickers: nextTickers,

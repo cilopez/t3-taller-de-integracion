@@ -21,3 +21,16 @@ export function createColors(number) {
   }
   return colors;
 }
+
+export function getTickers(data) {
+  const tickers = [];
+  for (let index = 0; index < data.length; index++) {
+    const element = data[index];
+    Object.keys(element).forEach(function (key) {
+      if (key !== "time" && !tickers.includes(key)) {
+        tickers.push(key);
+      }
+    });
+  }
+  return tickers;
+}

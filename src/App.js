@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import StockChart from "./components/StockChart";
 import ConnectButton from "./components/ConnectButton";
+import StockTable from "./components/StockTable";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -50,9 +51,6 @@ function App() {
       setData(newData);
     });
   });
-  // getStock(socket);
-  // getExchange(socket);
-
   return (
     <div className="App">
       <div className={classes.root}>
@@ -67,6 +65,9 @@ function App() {
       </div>
       <div style={{ width: "50%", height: 400, margin:0  }}>
         <StockChart socket={socket} data={data} />
+      </div>
+      <div>
+        <StockTable data={data}/>
       </div>
     </div>
   );
