@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { createColors, getRandomColor } from "../utils/utils";
-import { ResponsiveContainer } from "recharts";
+import {getRandomColor } from "../utils/utils";
 import {
   Line,
   LineChart,
@@ -16,7 +15,8 @@ export default class StockChart extends Component {
     super(props);
     this.state = {
       socket: this.props.socket,
-      colors: createColors(5),
+      tickers: [],
+      lines: [],
     };
     this.getTickers = this.getTickers.bind(this);
   }
@@ -33,11 +33,27 @@ export default class StockChart extends Component {
     }
     return tickers;
   }
+
+  componentWillReceiveProps(nextProps){
+      const {tickers, lines} = this.state;
+      const nextTickers = this.getTickers(nextProps.data);
+    //   console.log(tickers);
+    //   console.log(nextTickers);
+      if(tickers === [] || nextTickers.length !==  tickers.length){
+        console.log(nextTickers[nextTickers.length - 1]);
+        this.setState({tickers: nextTickers, lines: [...lines,
+        <Line
+            type="monotone"
+            dataKey={nextTickers[nextTickers.length - 1]}
+            connectNulls={true}
+            stroke={getRandomColor()}
+          />]});
+      } 
+  }
  
-
-
   render() {
     const { data } = this.props;
+    const { tickers, lines} = this.state;
     return (
       <div>
         <h1>StockChart</h1>
@@ -47,14 +63,7 @@ export default class StockChart extends Component {
           <Tooltip />
           <Legend />
           <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-          {this.getTickers(data) ? this.getTickers(data).map((e) => (
-            <Line
-              type="monotone"
-              dataKey={e}
-              connectNulls={true}
-              stroke =  {getRandomColor()}
-            />
-          )): null}
+          {tickers ? lines : null}
         </LineChart>
       </div>
     );
