@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import { getTickers } from "../utils/utils";
 import {getStock} from '../utils/sockets';
 
-export default class StockTable extends Component {
+export default class ExchangeTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,8 +35,8 @@ export default class StockTable extends Component {
   componentDidMount(){
     const {socket} = this.props;
     const dict = {};
-    socket.emit("STOCKS");
-    socket.once("STOCKS", (data) => {
+    socket.emit("EXCHANGE");
+    socket.once("EXCHANGE", (data) => {
       data.map(e => dict[e.ticker]= {'country': e.country, 'name': e.company_name} );
       this.setState({stocks: dict});
     });
@@ -44,10 +44,9 @@ export default class StockTable extends Component {
   }
 
   render() {
-    const {data} = this.props;
     const {tickers, stocks} = this.state;
     return (
-        <Table  striped bordered hover style={{fontSize: '14px'}} >
+        <Table  striped bordered hover style={{fontSize: '14px'}}>
           <thead>
           <tr>
             <th>Ticker</th>

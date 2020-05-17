@@ -1,5 +1,4 @@
 export function getStock(socket) {
-  console.log("STOCKS");
   socket.emit("STOCKS");
   socket.once("STOCKS", (data) => {
     return data;

@@ -5,9 +5,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import StockChart from "./components/StockChart";
 import ConnectButton from "./components/ConnectButton";
 import StockTable from "./components/StockTable";
+import ExchangeTable from "./components/ExchangeTable";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
+
 import { getStock, getExchange } from "./utils/sockets";
 import "./App.css";
 
@@ -63,13 +65,21 @@ function App() {
           </Toolbar>
         </AppBar>
       </div>
-      <div style={{ width: "50%", height: 400, margin:0  }}>
-        <StockChart socket={socket} data={data} />
-      </div>
-      <div>
-        <StockTable data={data}/>
+      <div style={{marginLeft:'5%', marginRight:'5%'}}>
+        <div style={{ width: "50%", height: 400}}>
+          <StockChart socket={socket} data={data} />
+        </div>
+        <div style={{marginTop: '2%'}}>
+          <div style={{float:"left"}}>
+            <StockTable data={data} socket={socket}/>
+          </div>
+          <div style={{float:"right"}}>
+            <ExchangeTable data={data} socket={socket}/>
+          </div>
+        </div>
       </div>
     </div>
+
   );
 }
 
