@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Table from 'react-bootstrap/Table';
-import { getTickers } from "../utils/utils";
-import {getStock} from '../utils/sockets';
+
 
 export default class StockTable extends Component {
   constructor(props) {
@@ -66,9 +65,9 @@ export default class StockTable extends Component {
           <th>{`${e}`}</th>
           <th>{e in stocks ? `${stocks[e].name.substring(0,15)}` : null}</th>
           <th>{e in stocks ? stocks[e].country : null}</th>
-          <th>{`\$${Math.max(...tickers[e])}`}</th>
-          <th>{`\$${Math.min(...tickers[e])}`}</th>
-          <th>{`\$${tickers[e][tickers[e].length-1]}`}</th>
+          <th>{`$${Math.max(...tickers[e])}`}</th>
+          <th>{`$${Math.min(...tickers[e])}`}</th>
+          <th>{`$${tickers[e][tickers[e].length-1]}`}</th>
           <th>{tickers[e].length > 1 ? `${Math.round(100*(tickers[e][tickers[e].length-1] - tickers[e][tickers[e].length-2])/tickers[e][tickers[e].length-2])}%` : null}</th>
         </tr>
          )

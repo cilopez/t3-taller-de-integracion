@@ -9,8 +9,6 @@ import ExchangeTable from "./components/ExchangeTable";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
-
-import { getStock, getExchange } from "./utils/sockets";
 import "./App.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -66,7 +64,7 @@ function App() {
         </AppBar>
       </div>
       <div style={{marginLeft:'5%', marginRight:'5%'}}>
-        <div style={{ width: "50%", height: 400}}>
+        <div style={{ width: "90%", height: 400}}>
           <StockChart socket={socket} data={data} />
         </div>
         <div style={{marginTop: '2%'}}>

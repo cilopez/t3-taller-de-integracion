@@ -65,7 +65,7 @@ export default class StockChart extends Component {
             type="number"
           />
           <YAxis
-            label={{ value: "Valor", angle: -90, position: "insideLeft" }}
+            label={{ value: "Valor ($USD)", angle: -90, position: "insideLeft" }}
           />
           <Tooltip
             labelFormatter={(unixTime) =>

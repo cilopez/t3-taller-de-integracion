@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Table from 'react-bootstrap/Table';
-import { getTickers } from "../utils/utils";
-import {getStock} from '../utils/sockets';
 
 export default class ExchangeTable extends Component {
   constructor(props) {
@@ -34,41 +32,38 @@ export default class ExchangeTable extends Component {
 
   componentDidMount(){
     const {socket} = this.props;
-    const dict = {};
-    socket.emit("EXCHANGE");
-    socket.once("EXCHANGE", (data) => {
-      data.map(e => dict[e.ticker]= {'country': e.country, 'name': e.company_name} );
-      this.setState({stocks: dict});
+    socket.emit("EXCHANGES");
+    socket.once("EXCHANGES", (data) => {
+      this.setState({exchanges: data});
     });
 
   }
 
   render() {
-    const {tickers, stocks} = this.state;
+    const {tickers, stocks, exchanges} = this.state;
+    console.log(exchanges);
     return (
         <Table  striped bordered hover style={{fontSize: '14px'}}>
           <thead>
           <tr>
-            <th>Ticker</th>
+            <th>Exchange Ticker</th>
             <th>Nombre</th>
             <th>Pais</th>
-            <th>Maximo</th>
-            <th>Minimo</th>
-            <th>Último</th>
-            <th>Variación</th>
+            <th># Acciones</th>
+            <th>VV</th>
+            <th>VC</th>
+            <th>VT</th>
+            <th>Participacion</th>
           </tr>
         </thead>
         <tbody>
         {
-        Object.keys(tickers).map((e) =>
+        Object.keys(exchanges).map((e) =>
         <tr>
-          <th>{`${e}`}</th>
-          <th>{e in stocks ? `${stocks[e].name.substring(0,15)}` : null}</th>
-          <th>{e in stocks ? stocks[e].country : null}</th>
-          <th>{`\$${Math.max(...tickers[e])}`}</th>
-          <th>{`\$${Math.min(...tickers[e])}`}</th>
-          <th>{`\$${tickers[e][tickers[e].length-1]}`}</th>
-          <th>{tickers[e].length > 1 ? `${Math.round(100*(tickers[e][tickers[e].length-1] - tickers[e][tickers[e].length-2])/tickers[e][tickers[e].length-2])}%` : null}</th>
+          <th>{e}</th>
+          <th>{exchanges[e].name}</th>
+          <th>{exchanges[e].country}</th>
+          <th>{exchanges[e].listed_companies.length}</th>
         </tr>
          )
         }
