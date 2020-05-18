@@ -46,7 +46,7 @@ export default class StockTable extends Component {
     const {data} = this.props;
     const {tickers, stocks} = this.state;
     return (
-        <Table  striped bordered hover style={{fontSize: '12px'}} >
+        <Table  striped bordered hover >
           <thead>
           <tr>
             <th>Ticker</th>

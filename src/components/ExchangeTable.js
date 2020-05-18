@@ -99,7 +99,7 @@ export default class ExchangeTable extends Component {
   render() {
     const {tickers, stocks, exchanges, total} = this.state;
     return (
-        <Table  striped bordered hover style={{fontSize: '12px'}}>
+        <Table  striped bordered hover>
           <thead>
           <tr>
             <th>Exchange Ticker</th>

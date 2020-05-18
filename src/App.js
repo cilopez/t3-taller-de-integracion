@@ -68,14 +68,14 @@ function App() {
         <div style={{ width: "90%", height: 400}}>
           <StockChart socket={socket} data={data} />
         </div>
-        <div style={{marginTop: '2%'}}>
-          <div style={{float:"left"}}>
+        <div className={"container row"} style={{marginTop: '2%', align: 'center', fontSize:12}}>
+          <div className="col-6">
             <Typography variant="h6" className={classes.title}>
               Tabla Acciones
             </Typography>
             <StockTable data={data} socket={socket}/>
           </div>
-          <div style={{float:"right"}}>
+          <div className="col-6">
             <Typography variant="h6" className={classes.title}>
               Tabla Mercado
             </Typography>
