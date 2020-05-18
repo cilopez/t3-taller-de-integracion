@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [data, setData] = useState([]);
+  const connected = true;
   const url = "wss://le-18262636.bitzonte.com";
   const socket = io(url, {
     path: "/stocks",
@@ -59,11 +60,11 @@ function App() {
             <Typography variant="h6" className={classes.title}>
               Stock Market Dashboard
             </Typography>
-            <ConnectButton socket={socket} />
+            <ConnectButton socket={socket} connected={connected} />
           </Toolbar>
         </AppBar>
       </div>
-      <div style={{marginLeft:'5%', marginRight:'5%'}}>
+      <div style={{marginLeft:'3%', marginRight:'3%'}}>
         <div style={{ width: "90%", height: 400}}>
           <StockChart socket={socket} data={data} />
         </div>
