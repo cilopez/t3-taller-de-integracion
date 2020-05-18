@@ -58,7 +58,7 @@ function App() {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
-              Stock Market Dashboard
+              Dashboard Bolsa
             </Typography>
             <ConnectButton socket={socket} connected={connected} />
           </Toolbar>
@@ -70,9 +70,15 @@ function App() {
         </div>
         <div style={{marginTop: '2%'}}>
           <div style={{float:"left"}}>
+            <Typography variant="h6" className={classes.title}>
+              Tabla Acciones
+            </Typography>
             <StockTable data={data} socket={socket}/>
           </div>
           <div style={{float:"right"}}>
+            <Typography variant="h6" className={classes.title}>
+              Tabla Mercado
+            </Typography>
             <ExchangeTable data={data} socket={socket}/>
           </div>
         </div>
